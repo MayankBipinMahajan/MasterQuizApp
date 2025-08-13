@@ -1,0 +1,20 @@
+spring.application.name=quiz
+server.port=8082
+
+# Database Connection Settings
+spring.datasource.url=jdbc:postgresql://localhost:5432/quiz
+spring.datasource.username=postgres
+spring.datasource.password=your_local_postgres_password
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# File Upload Settings
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=15MB
+
+# --- Cloudinary Settings ---
+cloudinary.cloud_name=YOUR_CLOUDINARY_CLOUD_NAME
+cloudinary.api_key=YOUR_CLOUDINARY_API_KEY
+cloudinary.api_secret=YOUR_CLOUDINARY_API_SECRET
+
+# --- Google Gemini API Key ---
+gemini.api.key=YOUR_GEMINI_API_KEY

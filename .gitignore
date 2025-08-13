@@ -1,0 +1,10 @@
+# IDE and build files
+.idea/
+target/
+*.iml
+
+# Log files
+*.log
+
+# IMPORTANT: Ignore the file with your secret API keys
+/src/main/resources/application.properties
