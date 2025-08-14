@@ -3,35 +3,36 @@
 # ----------------------------------
 FROM eclipse-temurin:21-jdk AS build
 
-# Set working directory inside container
 WORKDIR /app
 
-# Copy Maven wrapper & pom.xml first for dependency caching
-COPY pom.xml .
-COPY mvnw .
+# Copy Maven files first for caching
+COPY pom.xml mvnw ./
 COPY .mvn .mvn
 
-# Download Maven dependencies
+# Make mvnw executable
+RUN chmod +x mvnw
+
+# Download dependencies
 RUN ./mvnw dependency:go-offline
 
 # Copy the rest of the source code
 COPY src ./src
 
-# Package the application without running tests
+# Package the application without tests
 RUN ./mvnw clean package -DskipTests
 
 # ----------------------------------
-# Stage 2: Create a smaller runtime image
+# Stage 2: Runtime image
 # ----------------------------------
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-# Copy only the JAR file from the build stage
+# Copy built jar from build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose the default Spring Boot port (can be overridden by env var)
-EXPOSE 8080
+# Environment variable for Render's PORT
+ENV SERVER_PORT=${PORT}
 
-# Run the Spring Boot application
+# Run Spring Boot
 ENTRYPOINT ["java", "-jar", "app.jar"]
