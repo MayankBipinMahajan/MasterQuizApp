@@ -77,8 +77,26 @@ function startQuiz(testId) {
     window.location.href = `quiz.html?testId=${testId}`;
 }
 
-// When the page is fully loaded, run both functions to populate the page.
+// Replace the existing DOMContentLoaded listener at the end of index.js
+
 document.addEventListener('DOMContentLoaded', () => {
     loadTests();
     loadTopPerformers();
+
+    // --- CORRECTED Hamburger Menu Logic ---
+    const hamburger = document.getElementById('hamburger-menu');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+        });
+
+        // Close menu when a link is clicked
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+            });
+        });
+    }
 });

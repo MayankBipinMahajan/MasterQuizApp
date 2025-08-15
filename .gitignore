@@ -6,5 +6,9 @@ target/
 # Log files
 *.log
 
+.env
+
+
 # IMPORTANT: Ignore the file with your secret API keys
 /src/main/resources/application.properties
+

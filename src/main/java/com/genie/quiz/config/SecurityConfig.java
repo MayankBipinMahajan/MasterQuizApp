@@ -26,8 +26,10 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Public pages and auth API
+                        // --- THIS IS THE FINAL FIX ---
+                        // Public pages and resources that anyone can access
                         .requestMatchers(
+                                "/", "/landing.html", "/landing.css", "/landing.js", "/images/**",
                                 "/login.html", "/register.html", "/auth.css", "/register.js", "/login.js",
                                 "/api/auth/**"
                         ).permitAll()
@@ -45,7 +47,8 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login.html?logout=true")
+                        // After logout, redirect to the new landing page
+                        .logoutSuccessUrl("/landing.html?logout=true")
                         .permitAll()
                 );
 

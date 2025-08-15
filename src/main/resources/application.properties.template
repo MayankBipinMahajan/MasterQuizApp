@@ -4,7 +4,7 @@ server.port=8082
 # Database Connection Settings
 spring.datasource.url=jdbc:postgresql://localhost:5432/quiz
 spring.datasource.username=postgres
-spring.datasource.password=your_local_postgres_password
+spring.datasource.password=root
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 
 # File Upload Settings
