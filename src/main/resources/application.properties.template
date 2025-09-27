@@ -1,20 +1,31 @@
 spring.application.name=quiz
-server.port=8082
 
-# Database Connection Settings
+# Render sets PORT (defaults to 10000). Locally it?ll fall back to 8080.
+
+server.port=8080
+
+# Let Render provide these via env vars
 spring.datasource.url=jdbc:postgresql://localhost:5432/quiz
 spring.datasource.username=postgres
-spring.datasource.password=root
+spring.datasource.password=mayank@123
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
 
-# File Upload Settings
-spring.servlet.multipart.max-file-size=10MB
-spring.servlet.multipart.max-request-size=15MB
+logging.level.org.springframework.security=TRACE
+
+admin.username=admin
+admin.password=adminpass
 
 # --- Cloudinary Settings ---
-cloudinary.cloud_name=YOUR_CLOUDINARY_CLOUD_NAME
-cloudinary.api_key=YOUR_CLOUDINARY_API_KEY
-cloudinary.api_secret=YOUR_CLOUDINARY_API_SECRET
+cloudinary.cloud_name=dmzlgshmw
+cloudinary.api_key=571989257541843
+cloudinary.api_secret=ek6L6t5PSJyIeXkbH4lPxFxJkrE
 
 # --- Google Gemini API Key ---
-gemini.api.key=YOUR_GEMINI_API_KEY
+# Google Gemini
+gemini.api.key=AIzaSyAlewvMQHCiAzecPDjmQJEi2m3FkQv87Cs
+gemini.model.name=gemini-2.5-flash
+
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB

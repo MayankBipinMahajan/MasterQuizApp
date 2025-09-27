@@ -1,6 +1,8 @@
 package com.genie.quiz.entity;
 
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Primary;
+
 import java.util.List;
 
 @Entity

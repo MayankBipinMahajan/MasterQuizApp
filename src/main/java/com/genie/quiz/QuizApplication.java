@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+import org.springframework.beans.factory.annotation.Value;
 @SpringBootApplication
 public class QuizApplication {
 
@@ -22,22 +22,32 @@ public class QuizApplication {
 	 * It checks if an "admin" user exists. If not, it creates one with a
 	 * default password and the "ADMIN" role.
 	 */
+
+
+
+
 	@Bean
-	public CommandLineRunner  createAdminUser(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+	public CommandLineRunner createAdminUser(
+			UserRepository userRepository,
+			PasswordEncoder passwordEncoder,
+			@Value("${admin.username}") String adminUsername,
+			@Value("${admin.password}") String adminPassword) {
+
 		return args -> {
-			// Check if an admin user already exists
-			if (userRepository.findByUsername("admin").isEmpty()) {
+			if (userRepository.findByUsername(adminUsername).isEmpty()) {
 				User admin = new User();
-				admin.setUsername("admin");
+				admin.setUsername(adminUsername);
 				admin.setEmail("admin@quizapp.com");
-				// IMPORTANT: Use a strong, secure password in a real application!
-				admin.setPassword(passwordEncoder.encode("adminpass"));
+				admin.setPassword(passwordEncoder.encode(adminPassword));
 				admin.setRole("ADMIN");
-				admin.setProfileImageUrl("https://res.cloudinary.com/dmzlgshmw/image/upload/v1754414878/7e30aa62-6740-4b3f-b27b-0ba94544c14f.jpg"); // No default image for the admin
+				admin.setProfileImageUrl("/images/default-avatar.png");
 
 				userRepository.save(admin);
-				System.out.println(">>> Default ADMIN user created. Username: 'admin', Password: 'adminpass' <<<");
+				System.out.println(">>> Default ADMIN user ensured <<<");
 			}
 		};
 	}
+
+
+
 }

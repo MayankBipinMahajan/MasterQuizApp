@@ -90,7 +90,7 @@ function checkAnswer(isCorrect, selectedButton) {
 }
 
 function startTimer() {
-    let timeLeft = 15;
+    let timeLeft = 30;
     const timerEl = document.getElementById('timer');
     timerEl.textContent = timeLeft;
 

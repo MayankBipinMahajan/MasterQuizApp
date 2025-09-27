@@ -2,6 +2,7 @@ package com.genie.quiz.service;
 
 import com.genie.quiz.entity.User;
 import com.genie.quiz.repo.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

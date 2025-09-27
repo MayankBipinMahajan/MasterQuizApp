@@ -20,6 +20,8 @@ public class AIService {
 
     @Value("${gemini.api.key}")
     private String apiKey;
+    @Value("${gemini.model.name}")
+    private String modelName;
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -38,7 +40,7 @@ public class AIService {
         part.put("text", prompt);
         String requestBody = objectMapper.writeValueAsString(root);
 
-        String url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=" + apiKey;
+        String url = "https://generativelanguage.googleapis.com/v1beta/models/" + modelName + ":generateContent?key=" + apiKey;
 
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
                 .header("Content-Type", "application/json")
